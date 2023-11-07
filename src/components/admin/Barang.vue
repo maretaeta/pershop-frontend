@@ -77,7 +77,7 @@
                                 <div class="text-sm leading-5 font-medium text-gray-900">{{ product.nama_barang }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                <div class="text-sm leading-5 font-medium text-gray-900">{{ product.harga_barang }}</div>
+                                <div class="text-sm leading-5 font-medium text-gray-900">{{ formatHarga(product.harga_barang) }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 <div class="text-sm leading-5 font-medium text-gray-900">{{ product.stok_barang }}</div>
@@ -165,6 +165,18 @@ export default {
             }
         }
 
+        // Format Rupiah
+        function formatToRupiah(number) {
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR"
+            }).format(number);
+        }
+
+        function formatHarga(harga) {
+            return formatToRupiah(harga);
+        }
+
         onMounted(async () => {
             getBarang();
         });
@@ -182,7 +194,8 @@ export default {
             editedProduct,
             deleteBarang,
             showCreateModal,
-            closeCreateModal
+            closeCreateModal,
+            formatHarga
         };
         
     },
