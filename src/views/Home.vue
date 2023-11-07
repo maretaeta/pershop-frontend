@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import dashboard from "../components/dashboard.vue";
+import dashboard from "../components/kasir/dashboard.vue"
 import navbar from "../components/navbar.vue"
 import sidebar from "../components/sidebar.vue"
 

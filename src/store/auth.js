@@ -5,7 +5,8 @@ import axios from "axios";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    token: null,
+    token: localStorage.getItem("token") || null,
+    users: [],
   }),
 
   actions: {
@@ -34,17 +35,37 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    async login(username, password) {
-      return axios
-        .post("http://localhost:3000/api/v1/auth/login", {
-          username,
-          password,
-        })
-        .then((response) => {
-          (this.token = response.data.token),
-            localStorage.setItem("token", this.token);
-          axios.defaults.headers.common["Authorization"] = `Bearer $(token)`;
-        });
+    async login(loginData) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/v1/auth/login",
+          loginData
+        );
+
+        console.log("Full server response:", response);
+
+        if (!response) {
+          throw new Error("Login failed");
+        }
+
+        if (
+          response.data &&
+          response.data.result &&
+          response.data.result.token
+        ) {
+          const { token } = response.data.result;
+          localStorage.setItem("token", token);
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+          this.token = token;
+          return response.data;
+        } else {
+          console.error("Token not found in the response");
+          throw new Error("Login failed");
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        throw error;
+      }
     },
 
     logout() {

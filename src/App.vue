@@ -1,26 +1,41 @@
 <template>
   <div id="app">
-    <div class="flex flex-row w-full gap-0">
-          <div>
-              <sidebar />
+    <div class="font-poppins leading-normal tracking-normal">
+      <div class="flex flex-wrap">
+        <sidebar v-if="showSidebarFrame" />
+        <div class="w-full" :class="isSideBarOpen ? 'overlay' : ''">
+          <navbar v-if="showNavbar" />
+          <div class="">
+            <router-view />
           </div>
-          <div class="flex flex-col w-full bg-slate-100">
-              <navbar />
-              <RouterView />
-          </div>
-       </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import sidebar from "./components/sidebar.vue"
+import { useStore } from "./store/store";
+
 import navbar from "./components/navbar.vue"
+import sidebar from "./components/sidebar.vue";
 
 export default {
   name: 'App',
+  computed: {
+    isSideBarOpen() {
+      return useStore().isSideBarOpen;
+    },
+    showNavbar() {
+      return !["Login", "Register"].includes(this.$route.name);
+    },
+    showSidebarFrame() {
+      return !["Login", "Register", "dashboardKasir"].includes(this.$route.name);
+    },
+  },
   components: {
     sidebar,
     navbar,
   }
-};
+}
 </script>
