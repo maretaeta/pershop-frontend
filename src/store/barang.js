@@ -7,6 +7,7 @@ export const useProductStore = defineStore("product", {
   state: () => ({
     token: localStorage.getItem("token") || null,
     products: [],
+    totalBarang: 0,
   }),
 
   actions: {
@@ -66,7 +67,6 @@ export const useProductStore = defineStore("product", {
           }
         );
         return response;
-        
       } catch {
         console.error("Error delete data:", error);
         return null;
@@ -94,6 +94,23 @@ export const useProductStore = defineStore("product", {
       } catch (error) {
         console.error("Error creating product:", error);
         return null;
+      }
+    },
+
+    async getTotalBarang() {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/v1/barang/totalBarang",
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        );
+        this.totalBarang = response.data.total;
+      } catch (error) {
+        console.error("Error fetching data stok barang:", error);
+        throw Error
       }
     },
   },

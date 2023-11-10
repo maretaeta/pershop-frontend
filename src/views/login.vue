@@ -17,7 +17,7 @@ export default {
                 const response = await store.login(loginData.value);
 
                 if (response) {
-                    router.push("/dashboardKasir");
+                    router.push("/");
                 } else {
                     console.error("Login failed");
                 }
@@ -38,7 +38,7 @@ export default {
 
 
 <template>
-    <div class="font-poppins w-full mx-auto h-full min-h-screen bg-slate-100 items-center justify-center justify-items-center flex p-5">
+    <div class="font-poppins w-full mx-auto h-full min-h-screen items-center justify-center justify-items-center flex p-5">
         <div class="lg:grid grid-cols-2">
             <div class="flex lg:block">
                 <img src="@/assets/img.png" class="   w-full h-full mx-auto" />

@@ -26,19 +26,19 @@
         <div class="flex flex-wrap -mx-3 mb-16 p-2">
             <div class="w-1/2 xl:w-1/3 px-3">
                 <div class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0">
-                    <div class="px-3 py-10 lg:px-5 lg:py-5 bg-violet-500 text-white rounded-l-lg">
+                    <div class="px-3 py-10 lg:px-5 lg:py-5 bg-cyan-700  text-white rounded-l-lg">
                         <font-awesome-icon icon="bag-shopping"  class="w-8 h-8 fill-current mx-auto hidden lg:block" />
                     </div>
                     <div class="text-gray-700 ml-6 leading-6">
                         <p class="text-sm text-gray-600">Total Produk</p>
-                        <p class="font-semibold text-2xl">100</p>
+                        <p class="font-semibold text-2xl">{{ usebarang.totalBarang }}</p>
                     </div>
                 </div>
             </div>
 
             <div class="w-1/2 xl:w-1/3 px-3">
                 <div class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0">
-                    <div class="px-3 py-10 lg:px-5 lg:py-5 bg-violet-500 text-white rounded-l-lg">
+                    <div class="px-3 py-10 lg:px-5 lg:py-5 bg-cyan-700 text-white rounded-l-lg">
                         <font-awesome-icon icon="credit-card" class="w-8 h-8 fill-current mx-auto hidden lg:block" />
                     </div>
                     <div class="text-gray-700 ml-6 leading-6">
@@ -50,12 +50,12 @@
 
             <div class="w-1/2 xl:w-1/3 px-3">
                 <div class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0">
-                    <div class="px-3 py-10 lg:px-5 lg:py-5 bg-violet-500 text-white rounded-l-lg">
+                    <div class="px-3 py-10 lg:px-5 lg:py-5 bg-cyan-700  text-white rounded-l-lg">
                         <font-awesome-icon icon="sack-dollar" class="w-8 h-8 fill-current mx-auto hidden lg:block" />
                     </div>
                     <div class="text-gray-700 ml-6 leading-6">
                         <p class="text-sm text-gray-600">Total Pendapatan</p>
-                        <p class="font-semibold text-2xl">100</p>
+                        <p class="font-semibold text-2xl">{{ formatHarga(transaksi.totalPendapatan) }}</p>
                     </div>
                 </div>
             </div>
@@ -64,3 +64,40 @@
     </div>
 </div>
 </template>
+
+<script>
+import {ref, onMounted, computed} from "vue"
+import { useProductStore } from "../../store/barang";
+import { useTransaksi } from "../../store/transaksi";
+
+export default{
+    setup(){
+        const usebarang = useProductStore()
+        const transaksi = useTransaksi()
+
+        // Format Rupiah
+        function formatToRupiah(number) {
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR"
+            }).format(number);
+        }
+
+        function formatHarga(harga) {
+            return formatToRupiah(harga);
+        }
+
+        onMounted(async () => {
+            await usebarang.getTotalBarang();
+            await transaksi.getTotalPendapatan()
+
+        })
+
+        return{
+            usebarang,
+            transaksi,
+            formatHarga,
+        }
+    }    
+}
+</script>

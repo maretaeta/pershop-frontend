@@ -18,10 +18,10 @@
                 </ol>
                    <div class="items-center justify-center p-2 pt-10">
                     <div class="w-full">
-                        <h3 class="text-2xl font-medium text-gray-600">Data Produk</h3>
+                        <h3 class="text-2xl font-medium text-gray-700">Data Produk</h3>
                         <p class="text-sm text-gray-400 mb-6">Data Produk yang dipasarkan</p>
                         <div  class="flex gap-3 justify-end items-start pt-7 ">
-                            <div class="flex gap-2 bg-cyan-800 text-white w-38 h-10 rounded-xl items-center text-center px-5" @click="showCreateModal = true">
+                            <div class="flex gap-2 bg-cyan-600 text-white w-38 h-10 rounded-xl items-center text-center px-5" @click="showCreateModal = true">
                                 <font-awesome-icon icon="plus"/>
                                 <p class="text-sm">Create Produk</p>
                             </div>
@@ -43,27 +43,27 @@
                     <thead>
                         <tr>
                             <th
-                                class="px-5 py-3 bg-cyan-600 text-white text-center text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-5 py-3 bg-cyan-800 text-white text-center text-sm leading-4 font-medium uppercase tracking-wider">
                                 No
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-600 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
                                 Nama Barang
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-600 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
                                 Harga Barang
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-600 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
                                 Stok Barang
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-600 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
                                 Gambar
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-600 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
                                 Aksi
                             </th>
                         </tr>

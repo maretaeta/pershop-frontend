@@ -27,10 +27,10 @@ export default {
       return useStore().isSideBarOpen;
     },
     showNavbar() {
-      return !["Login", "Register"].includes(this.$route.name);
+      return !["Login", "Register", "EmptyLayout"].includes(this.$route.name);
     },
     showSidebarFrame() {
-      return !["Login", "Register", "dashboardKasir"].includes(this.$route.name);
+      return !["Login", "Register", "dashboardKasir", "EmptyLayout"].includes(this.$route.name);
     },
   },
   components: {

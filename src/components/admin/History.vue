@@ -18,17 +18,17 @@
                 </ol>
                 <div class="items-center justify-center p-2 pt-10">
                     <div class="w-full">
-                        <h3 class="text-2xl font-medium text-gray-600">History transaction</h3>
+                        <h3 class="text-2xl font-medium text-gray-700">History transaction</h3>
                         <p class="text-sm text-gray-400 mb-6">Data Transaksi</p>
                     </div>
                 </div>
             </div>
 
             <!-- Loop through transaction data and display it -->
-          <div v-for="(transaction, index) in transaksi" :key="index" class="border border-violet-600 rounded-lg w-full mx-auto mb-10 shadow">
+          <div v-for="(transaction, index) in transaksi" :key="index" class="border border-orange-600 rounded-lg w-full mx-auto mb-10 shadow-md">
             <div class="p-4">
               <div class="flex justify-between pb-9 font-medium text-sm md:text-lg">
-                <p class="text-violet-700 ">Transaksi #{{ transaction.id_transaksi }}</p>
+                <p class="text-cyan-800 ">Transaksi #{{ transaction.id_transaksi }}</p>
                 <p>{{ formatDate(transaction.createdAt)}}</p>
               </div>
               <div v-for="(barangTransaksi, i) in transaction.barang_transaksi" :key="i">
