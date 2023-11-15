@@ -1,6 +1,6 @@
 <template>
-    <div class="pl-0 lg:pl-64 w-full min-h-screen p-10 bg-slate-100 relative">
-        <div class="bg-white min-h-screen rounded-xl p-8 ml-10">
+    <div class="pl-4 lg:pl-60 xl:pl-64  w-full min-h-screen p-7 xl:p-10 bg-slate-100 relative">
+        <div class="bg-white min-h-screen rounded-xl p-7 ml-2">
             <!-- Navigasi -->
             <div class="font-poppins text-sm font-semibold mb-6">
                 <ol class="list-none p-0 pl-3 inline-flex">
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <!-- Loop through transaction data and display it -->
+            <!-- Table history -->
           <div v-for="(transaction, index) in transaksi" :key="index" class="border border-orange-600 rounded-lg w-full mx-auto mb-10 shadow-md">
             <div class="p-4">
               <div class="flex justify-between pb-9 font-medium text-sm md:text-lg">

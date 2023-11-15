@@ -50,7 +50,7 @@ export default {
 
 
 <template>
-    <div class="font-poppins w-1/2 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen lg:block bg-white z-30 transition duration-500 ease-in-out"
+    <div class="font-poppins w-1/2 md:w-1/3 lg:w-56 fixed md:top-0 md:left-0 h-screen lg:block bg-white z-30 transition duration-500 ease-in-out"
         :class="sideBarOpen ? '' : 'hidden'" id="main-nav">
 
         <div  class="w-full h-24 flex px-5 items-center mb-8 p-5">

@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-slate-100 min-h-screen lg:p-10 p-5 relative">
-    <div class="bg-white min-h-screen rounded-xl font-poppins mb-6 p-6 xl:p-10">
-      <div class="flex flex-col md:flex-row gap-8">
+  <div class="bg-slate-100 min-h-screen lg:p-8 p-5 relative">
+    <div class="bg-white min-h-screen rounded-xl font-poppins mb-6 p-5 xl:p-10 w-full mx-auto">
+      <div class="flex flex-col md:flex-row gap-8 w-full">
         <!-- Barang Content -->
         <div class="w-full min-h-screen">
           <!-- Search Input -->
@@ -34,7 +34,7 @@
                 <p>{{ product.harga_barang }}</p>
               </div>
             <div class="w-full bg-cyan-600 rounded-md mt-5 flex items-center justify-between">
-                <button @click="toggleProductSelection(product); angkaPerProduk[product.id_barang] = 0" class="text-white text-sm p-2 justify-center text-center flex-">
+                <button @click="toggleProductSelection(product); angkaPerProduk[product.id_barang] = 1" class="text-white text-sm p-2 justify-center text-center flex-">
                     {{ isSelectedProduct(product) ? '' : 'Pilih' }}
                 </button>
                 <button @click="kurangAngka(product)" v-if="isSelectedProduct(product)" class="text-white text-sm p-2 text-center flex-auto">-</button>
@@ -53,9 +53,9 @@
         <table class="w-full min-w-full text-left">
           <thead>
             <tr class="grid grid-cols-3 w-full gap-8 pb-5">
-              <th class=" font-semibold text-lg">Barang</th>
-              <th class=" font-semibold text-lg">Qty</th>
-              <th class=" font-semibold text-lg">Harga</th>
+              <th class=" font-semibold text-base">Barang</th>
+              <th class=" font-semibold text-base">Qty</th>
+              <th class=" font-semibold text-base">Harga</th>
             </tr>
           </thead>
           <tbody>
@@ -70,11 +70,11 @@
 
       <div class="pt-10">
         <div class="flex justify-between py-1">
-          <h3 class="font-medium text-lg">Item Total</h3>
+          <h3 class="font-medium text-base">Item Total</h3>
           <p>{{ selectedProducts.length }} Item</p>
         </div>
         <div class="flex justify-between py-1">
-          <h3 class="font-medium text-lg">Sub Total</h3>
+          <h3 class="font-medium text-base">Sub Total</h3>
           <p>{{ formatHarga(totalHarga) }}</p>
         </div>
       </div>

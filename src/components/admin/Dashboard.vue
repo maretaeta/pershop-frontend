@@ -1,6 +1,6 @@
 <template>
-    <div class="pl-0 lg:pl-64 w-full min-h-screen p-10 bg-slate-100 relative">
-        <div class="bg-white min-h-screen rounded-xl p-8 ml-10">
+    <div class="pl-4 lg:pl-60 xl:pl-64  w-full min-h-screen p-7 xl:p-10 bg-slate-100 relative">
+        <div class="bg-white min-h-screen rounded-xl p-7 ml-2">
             <!-- Navigasi -->
             <div class="font-poppins text-sm font-semibold mb-6">
                 <ol class="list-none p-0 pl-3 inline-flex">
@@ -23,39 +23,39 @@
             </div>
 
             <!-- card -->
-        <div class="flex flex-wrap -mx-3 mb-16 p-2">
-            <div class="w-1/2 xl:w-1/3 px-3">
+        <div class="flex flex-wrap -mx-3 mb-16 p-2 flex-col md:flex-row">
+            <div class="w-full md:w-1/2 xl:w-1/3 px-3">
                 <div class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0">
                     <div class="px-3 py-10 lg:px-5 lg:py-5 bg-cyan-700  text-white rounded-l-lg">
                         <font-awesome-icon icon="bag-shopping"  class="w-8 h-8 fill-current mx-auto hidden lg:block" />
                     </div>
-                    <div class="text-gray-700 ml-6 leading-6">
+                    <div class="text-gray-700 ml-5 leading-6">
                         <p class="text-sm text-gray-600">Total Produk</p>
-                        <p class="font-semibold text-2xl">{{ usebarang.totalBarang }}</p>
+                        <p class="font-semibold text-ld md:text-xl">{{ usebarang.totalBarang }}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="w-1/2 xl:w-1/3 px-3">
+            <div class="w-full md:w-1/2 xl:w-1/3 px-3">
                 <div class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0">
                     <div class="px-3 py-10 lg:px-5 lg:py-5 bg-cyan-700 text-white rounded-l-lg">
                         <font-awesome-icon icon="credit-card" class="w-8 h-8 fill-current mx-auto hidden lg:block" />
                     </div>
-                    <div class="text-gray-700 ml-6 leading-6">
+                    <div class="text-gray-700 ml-5 leading-6">
                         <p class="text-sm text-gray-600">Total Penjualan</p>
-                        <p class="font-semibold text-2xl">100</p>
+                        <p class="font-semibold text-lg md:text-xl">100</p>
                     </div>
                 </div>
             </div>
 
-            <div class="w-1/2 xl:w-1/3 px-3">
+            <div class="w-full md:w-1/2 xl:w-1/3 px-3">
                 <div class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0">
                     <div class="px-3 py-10 lg:px-5 lg:py-5 bg-cyan-700  text-white rounded-l-lg">
                         <font-awesome-icon icon="sack-dollar" class="w-8 h-8 fill-current mx-auto hidden lg:block" />
                     </div>
-                    <div class="text-gray-700 ml-6 leading-6">
+                    <div class="text-gray-700 ml-5 leading-6">
                         <p class="text-sm text-gray-600">Total Pendapatan</p>
-                        <p class="font-semibold text-2xl">{{ formatHarga(transaksi.totalPendapatan) }}</p>
+                        <p class="font-semibold text-lg md:text-xl">{{ formatHarga(transaksi.totalPendapatan) }}</p>
                     </div>
                 </div>
             </div>

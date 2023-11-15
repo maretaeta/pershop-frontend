@@ -1,6 +1,6 @@
 <template>
-    <div class="pl-0 lg:pl-64 w-full min-h-screen p-10 bg-slate-100 relative">
-        <div class="bg-white min-h-screen rounded-xl p-8 ml-10">
+    <div class="pl-4 lg:pl-60 xl:pl-64  w-full min-h-screen p-7 xl:p-10 bg-slate-100 relative">
+        <div class="bg-white min-h-screen rounded-xl p-7 ml-2">
             <!-- Navigasi -->
             <div class="font-poppins text-sm font-semibold mb-6">
                 <ol class="list-none p-0 pl-3 inline-flex">
@@ -16,14 +16,18 @@
                         <p class="text-gray-600">Dashboard</p>
                     </li>
                 </ol>
-                   <div class="items-center justify-center p-2 pt-10">
+
+                <!-- judul -->
+                <div class="items-center justify-center p-2 pt-10">
                     <div class="w-full">
                         <h3 class="text-2xl font-medium text-gray-700">Data Produk</h3>
                         <p class="text-sm text-gray-400 mb-6">Data Produk yang dipasarkan</p>
+
+                        <!-- button create -->
                         <div  class="flex gap-3 justify-end items-start pt-7 ">
                             <div class="flex gap-2 bg-cyan-600 text-white w-38 h-10 rounded-xl items-center text-center px-5" @click="showCreateModal = true">
                                 <font-awesome-icon icon="plus"/>
-                                <p class="text-sm">Create Produk</p>
+                                <p class="text-base">Create Produk</p>
                             </div>
                             <!-- <div class="flex gap-2 bg-cyan-800 text-white h-10 rounded-xl items-center text-center px-3" >
                                 <font-awesome-icon icon="print" />
@@ -43,27 +47,27 @@
                     <thead>
                         <tr>
                             <th
-                                class="px-5 py-3 bg-cyan-800 text-white text-center text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-5 py-3 bg-cyan-800 text-white text-center md:text-base text-sm leading-4 font-medium uppercase tracking-wider">
                                 No
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm md:text-base leading-4 font-medium uppercase tracking-wider">
                                 Nama Barang
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm md:text-base leading-4 font-medium uppercase tracking-wider">
                                 Harga Barang
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 md:text-base font-medium uppercase tracking-wider">
                                 Stok Barang
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm md:text-base leading-4 font-medium uppercase tracking-wider">
                                 Gambar
                             </th>
                             <th
-                                class="px-6 py-3 bg-cyan-800 text-white text-sm leading-4 font-medium uppercase tracking-wider">
+                                class="px-6 py-3 bg-cyan-800 text-white text-sm md:text-base leading-4 font-medium uppercase tracking-wider">
                                 Aksi
                             </th>
                         </tr>
@@ -119,8 +123,8 @@ import { ref, onMounted, watch } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { useProductStore } from "../../store/barang";
-import UpdateBarang from "../../modals/updatebarang.vue"
 import CreateBarangModal from "../../modals/CreateBarang.vue"
+import UpdateBarang from '../../modals/updatebarang.vue'
 
 export default {
     setup() {

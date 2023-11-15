@@ -8,6 +8,7 @@ import { useRouter } from "vue-router";
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     token: localStorage.getItem("token") || null,
+    
     users: [],
     role: null,
   }),
@@ -17,6 +18,7 @@ export const useAuthStore = defineStore("auth", {
   },
 
   actions: {
+    // Register
     async registerUser(userData) {
       try {
         const response = await fetch(
@@ -79,9 +81,13 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
+    // logout
     logout() {
-      const router = useRouter(); 
+      const router = useRouter();
+
       localStorage.removeItem("token");
+      this.token = null;
+      this.role = null;
       router.push("/");
     },
   },

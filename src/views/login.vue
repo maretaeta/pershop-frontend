@@ -1,14 +1,14 @@
 <template>
-    <div class="font-poppins w-full mx-auto h-full min-h-screen items-center justify-center justify-items-center flex p-5">
-        <div class="lg:grid grid-cols-2">
+    <div class="font-poppins w-full mx-auto items-center min-h-screen justify-center justify-items-center flex p-5">
+        <div class="flex flex-col md:flex-row md:flex">
             <div class="flex lg:block">
                 <img src="@/assets/img.png" class="w-full h-full mx-auto" />
             </div>
-            <div class="mx-auto px-10 flex items-center justify-center justify-items-center">
-                <div class="bg-white rounded-xl w-full p-16">
-                    <h1 class="lg:text-3xl text-xl font-bold">Hello Welcome Back Admin,</h1>
+            <div class="mx-auto flex items-center justify-center justify-items-center">
+                <div class="bg-white rounded-xl w-full p-5">
+                    <h1 class="lg:text-2xl text-xl font-bold">Hello Welcome Back,</h1>
                     <p class="pt-2 pb-5 lg:pb-7 text-sm">
-                        Welcome Back to Manajement Inventory Application: Easy and Fast Solution to Manage Business
+                        Welcome Back to Cashier Application: Easy and Fast Solution to Manage Business
                     </p>
                     <form class="mx-auto" @submit.prevent="handleLogin">
                         <div class="mb-3 lg:mb-7">
@@ -16,24 +16,24 @@
                                 <p class="text-sm">Username</p>
                             </label>
                             <input v-model="loginData.username" type="text" placeholder="Enter Username" name="username"
-                                class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 text-lg bg-transparent border border-cyan-800" />
+                                class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
                         </div>
 
-                        <div class="mb-3 lg:mb-7">
+                        <div class="mb-3 lg:mb-7 text-base">
                             <label>
                                 <p>Password</p>
                             </label>
                             <input v-model="loginData.password" type="password" placeholder="Enter Password" name="password"
-                                class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 text-lg bg-transparent border border-cyan-800" />
+                                class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
                         </div>
                         <button type="submit"
-                            class="bg-cyan-800 rounded-md text-white w-full mx-auto py-2 ml-2 mt-3 xl:w-[500px]">
+                            class="bg-cyan-800 rounded-md text-white w-full mx-auto py-2 ml-2 mt-3 xl:w-[500px] text-base">
                             Login
                         </button>
                     </form>
-                    <p class="text-center pt-7">
+                    <p class="text-center pt-7 text-base">
                         Don't have an account?
-                        <span class="text-cyan-900 pl-1">Sign up</span>
+                        <span class="text-cyan-900 pl-1 text-base" @click="handleRegister">Sign up</span>
                     </p>
                 </div>
             </div>
@@ -77,9 +77,14 @@ export default {
             }
         };
 
+        const handleRegister = () => {
+            router.push('Register')
+        }
+
         return {
             handleLogin,
             loginData,
+            handleRegister
         };
     },
 };
