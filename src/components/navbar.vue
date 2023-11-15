@@ -1,6 +1,8 @@
 <script>
 import { useStore } from '../store/store';
+import { useAuthStore } from '../store/auth';
 import VueFeather from 'vue-feather'
+import {useRouter} from "vue-router"
 
 export default {
     name: 'navbar',
@@ -18,7 +20,16 @@ export default {
         toggleSidebar() {
             useStore().toggleSidebar();
         },
+        async logoutUser() {
+            const authStore = useAuthStore();
+            const router = useRouter();
+
+
+            await authStore.logout();
+            await router.push("/");
+        },
     },
+
     components: {
         VueFeather,
     }
@@ -61,7 +72,7 @@ export default {
                 <font-awesome-icon icon="user" class="pt-1" />
                 <span>Account</span>
             </p>
-            <p class="px-4 py-2 hover:bg-gray-200 flex gap-3 text-red-600 ">
+            <p class="px-4 py-2 hover:bg-gray-200 flex gap-3 text-red-600 " @click="logoutUser">
                 <font-awesome-icon icon="right-from-bracket" class="pt-1"/>
                 <span class="">Logout</span>
             </p>

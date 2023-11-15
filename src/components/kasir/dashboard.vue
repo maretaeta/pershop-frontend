@@ -26,8 +26,10 @@
           <!-- Content Produk Left-->
           <div class="grid grid-cols-2 xl:grid-cols-3 gap-6 mt-10">
             <div v-for="product in products" :key="product.id_barang" class="border p-2 rounded">
-              <img :src="product.image" class=""/>
-              <div class="flex justify-between py-1 text-xs xl:text-sm">
+             <div class="items-center flex justify-center">
+               <img :src="product.image" class="h-48 items-center"/>
+             </div>
+              <div class="flex justify-between text-xs xl:text-sm px-3 pt-4">
                 <h3 class="h-10">{{ product.nama_barang }}</h3>
                 <p>{{ product.harga_barang }}</p>
               </div>
@@ -45,7 +47,7 @@
 
     <!-- Confirmation Content Right -->
     <div class="md:w-1/2 min-h-screen">
-      <h3 class="text-md md:text-lg">Shopping Klik Ku</h3>
+      <h3 class="text-md md:text-lg">Keranjang Shopping</h3>
       <p class="text-base text-slate-500">Kode pembelian #0001</p>
       <div class="pt-10">
         <table class="w-full min-w-full text-left">
@@ -58,7 +60,7 @@
           </thead>
           <tbody>
             <tr v-for="product in selectedProducts" :key="product.id_barang" class="grid grid-cols-3 w-full justify-between gap-8 pb-4">
-              <td class="text-base">{{ product.nama_barang }}</td>
+              <td class="">{{ product.nama_barang }}</td>
               <td class="">{{ angkaPerProduk[product.id_barang] || 0 }}</td>
               <td class="">{{ formatHarga(product.harga_barang) }}</td>
             </tr>

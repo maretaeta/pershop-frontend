@@ -1,43 +1,64 @@
+/** @format */
+
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import EmptyLayout from "../views/EmptyLayout.vue";
 import dashboardKasir from "../components/kasir/dashboard.vue";
 import dashboardAdmin from "../components/admin/Dashboard.vue";
 import Barang from "../components/admin/Barang.vue";
-import History from "../components//admin/History.vue";
+import History from "../components/admin/History.vue";
 
 const routes = [
   {
     path: "/",
+    name: "Login",
+    component: Login,
+    meta: { default: Login, layout: EmptyLayout },
+  },
+
+  {
+    path: "/dashboardKasir",
     name: "dashboardKasir",
     component: dashboardKasir,
+    meta: { requiresAuth: true, role: "kasir" },
   },
 
   {
     path: "/dashboardAdmin",
     name: "dashboardAdmin",
     component: dashboardAdmin,
-  },
-
-  { path: "/barang", 
-    name: "Barang", 
-    component: Barang 
+    meta: { requiresAuth: true, role: "admin" },
   },
 
   {
-    path:"/history",
+    path: "/kasir",
+    children: [
+      {
+        path: "/barang",
+        name: "Barang",
+        component: import("../components/admin/Barang.vue"),
+      },
+      {
+        path: "/history",
+        name: "History",
+        component: import("../components/admin/History.vue"),
+      },
+    ],
+  },
+
+  {
+    path: "/barang",
+    name: "Barang",
+    component: Barang,
+  },
+
+  {
+    path: "/history",
     name: "History",
-    component: History
+    component: History,
   },
 
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-    meta: { default: Login, layout: EmptyLayout },
-  },
   {
     path: "/register",
     name: "Register",
@@ -54,12 +75,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.required) {
-    const requiredData = localStorage.getItem("requiredData");
-    if (requiredData) {
-      next();
+  if (to.meta.requiresAuth) {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      next("/");
     } else {
-      next("/empty");
+      next();
     }
   } else {
     next();

@@ -119,7 +119,7 @@ import { ref, onMounted, watch } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { useProductStore } from "../../store/barang";
-import UpdateBarang from '../../modals/UpdateBarang.vue';
+import UpdateBarang from "../../modals/updatebarang.vue"
 import CreateBarangModal from "../../modals/CreateBarang.vue"
 
 export default {
