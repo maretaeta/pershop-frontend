@@ -16,7 +16,7 @@
                                 <p class="text-sm">Username</p>
                             </label>
                             <input v-model="loginData.username" type="text" placeholder="Enter Username" name="username"
-                                class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
+                                class="mt-1 ml-2 w-full  rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
                         </div>
 
                         <div class="mb-3 lg:mb-7 text-base">
@@ -24,10 +24,10 @@
                                 <p>Password</p>
                             </label>
                             <input v-model="loginData.password" type="password" placeholder="Enter Password" name="password"
-                                class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
+                                class="mt-1 ml-2 w-full rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
                         </div>
                         <button type="submit"
-                            class="bg-cyan-800 rounded-md text-white w-full mx-auto py-2 ml-2 mt-3 xl:w-[500px] text-base">
+                            class="bg-cyan-800 rounded-md text-white w-full mx-auto py-2 ml-2 mt-3  text-base">
                             Login
                         </button>
                     </form>
@@ -43,7 +43,7 @@
 
 <script>
 import { ref } from 'vue';
-import { useAuthStore } from '../store/auth'; 
+import { useAuthStore } from '../store/auth';
 import { useRouter } from 'vue-router';
 
 export default {
@@ -59,7 +59,7 @@ export default {
             try {
                 const response = await store.login(loginData.value);
 
-                if (response.status === 'Okay' && response.message === 'Successfully Login' && response.result && response.result.users) {
+                if (response && response.status === 'Okay' && response.message === 'Successfully Login' && response.result && response.result.users) {
                     const userRole = response.result.users.role;
 
                     if (userRole === 'ADMIN') {

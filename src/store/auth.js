@@ -3,12 +3,10 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { useRouter } from "vue-router";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     token: localStorage.getItem("token") || null,
-    
     users: [],
     role: null,
   }),
@@ -67,6 +65,7 @@ export const useAuthStore = defineStore("auth", {
           this.role = userRole;
 
           return response.data;
+
         } else {
           console.error("Token not found in the response");
           console.error("Response data:", response.data);
@@ -83,12 +82,43 @@ export const useAuthStore = defineStore("auth", {
 
     // logout
     logout() {
-      const router = useRouter();
-
       localStorage.removeItem("token");
       this.token = null;
       this.role = null;
-      router.push("/");
+    },
+
+     async updateProfilePicture(userId, file) {
+      try {
+        const formData = new FormData();
+        formData.append("image", file);
+
+        const response = await axios.post(`http://localhost:3000/api/v1/users/${userId}/profile-image`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
+
+        return response.data;
+      } catch (error) {
+        console.error("Error updating profile picture:", error);
+        throw error;
+      }
+    },
+
+    async updateUserData(userId, userData) {
+      try {
+        const response = await axios.put(`http://localhost:3000/api/v1/users/${userId}`, userData, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
+
+        return response.data;
+      } catch (error) {
+        console.error("Error updating user data:", error);
+        throw error;
+      }
     },
   },
 });

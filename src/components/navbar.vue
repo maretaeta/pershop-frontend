@@ -3,6 +3,7 @@ import { useStore } from '../store/store';
 import { useAuthStore } from '../store/auth';
 import VueFeather from 'vue-feather'
 import { useRouter } from "vue-router"
+import { AtSignIcon } from 'vue-feather-icons';
 
 export default {
     name: 'navbar',
@@ -20,8 +21,12 @@ export default {
             }
         };
 
+        const handleAccount = async () => {
+            router.push("/account")
+        }
         return{
-            handleLogout
+            handleLogout,
+            handleAccount
         }
         
     },
@@ -87,7 +92,7 @@ export default {
         <!-- dropdown account -->
         <div class="absolute border bg-white border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 right-0 mr-6 p-2"
             :class="dropDownOpen ? '' : 'hidden'">
-            <p class="flex gap-3 px-4 py-2 hover:bg-gray-200 text-cyan-950">
+            <p class="flex gap-3 px-4 py-2 hover:bg-gray-200 text-cyan-950" @click="handleAccount">
                 <font-awesome-icon icon="user" class="pt-1" />
                 <span>Account</span>
             </p>

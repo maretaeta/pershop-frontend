@@ -8,6 +8,8 @@ import dashboardKasir from "../components/kasir/dashboard.vue";
 import dashboardAdmin from "../components/admin/Dashboard.vue";
 import Barang from "../components/admin/Barang.vue";
 import History from "../components/admin/History.vue";
+import { useAuthStore } from "../store/auth";
+import Account from "../components/Account.vue";
 
 const routes = [
   {
@@ -21,42 +23,44 @@ const routes = [
     path: "/dashboardKasir",
     name: "dashboardKasir",
     component: dashboardKasir,
-    meta: { requiresAuth: true, role: "kasir" },
+    meta: { requiresAuth: true, role: "KASIR" },
   },
 
   {
     path: "/dashboardAdmin",
     name: "dashboardAdmin",
     component: dashboardAdmin,
-    meta: { requiresAuth: true, role: "admin" },
+    meta: { requiresAuth: true, role: "ADMIN" },
   },
 
-  {
-    path: "/kasir",
-    children: [
-      {
-        path: "/barang",
-        name: "Barang",
-        component: import("../components/admin/Barang.vue"),
-      },
-      {
-        path: "/history",
-        name: "History",
-        component: import("../components/admin/History.vue"),
-      },
-    ],
-  },
+  // {
+  //   path: "/kasir",
+  //   children: [
+  //     {
+  //       path: "/barang",
+  //       name: "Barang",
+  //       component: import("../components/admin/Barang.vue"),
+  //     },
+  //     {
+  //       path: "/history",
+  //       name: "History",
+  //       component: import("../components/admin/History.vue"),
+  //     },
+  //   ],
+  // },
 
   {
     path: "/barang",
     name: "Barang",
     component: Barang,
+    meta: { requiresAuth: true, role: "ADMIN", role: "KASIR" },
   },
 
   {
     path: "/history",
     name: "History",
     component: History,
+    meta: { requiresAuth: true, role: "ADMIN" },
   },
 
   {
@@ -67,6 +71,12 @@ const routes = [
   },
 
   { path: "/empty", name: "EmptyLayout", component: EmptyLayout },
+
+  {
+    path: "/account",
+    name: "Account",
+    component: Account,
+  },
 ];
 
 const router = createRouter({
@@ -75,13 +85,21 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
-    const token = localStorage.getItem("token");
+  const isAuthenticated = useAuthStore().isAuthenticated;
+  const userRole = useAuthStore().role;
 
-    if (!token) {
+  if (to.meta.requiresAuth) {
+    if (!isAuthenticated) {
       next("/");
     } else {
-      next();
+      const routeRole = to.meta.role;
+      const userRole = to.meta.role;
+      if (routeRole && userRole !== routeRole) {
+        console.error("Unauthorized access! Role mismatch.");
+        next("/");
+      } else {
+        next();
+      }
     }
   } else {
     next();

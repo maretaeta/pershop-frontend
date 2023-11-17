@@ -53,14 +53,14 @@ export default {
                                 <p class="text-base">Nama Lengkap</p>
                             </label>
                             <input v-model="registrationData.nama" type="text" placeholder="Enter Nama Lengkap" name="nama"
-                                class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
+                                class="mt-1 ml-2 w-full rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
                         </div>
                         <div class="mb-3 lg:mb-7 text-base">
                             <label>
                                 <p>Username</p>
                             </label>
                             <input v-model="registrationData.username" type="text" placeholder="Enter Username" name="username"
-                               class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
+                               class="mt-1 ml-2 w-full rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
                         </div>
 
                         <div class="mb-3 lg:mb-7 text-base">
@@ -68,10 +68,10 @@ export default {
                                 <p>Password</p>
                             </label>
                             <input v-model="registrationData.password" type="password" placeholder="Enter Password" name="password"
-                                class="mt-1 ml-2 w-full xl:w-[500px] rounded-md pl-2 h-10 bg-transparent border border-cyan-800 text-base" />
+                                class="mt-1 ml-2 w-full rounded-md pl-2 h-10 bg-transparent border border-cyan-800 text-base" />
                         </div>
                         <button 
-                        @click.prevent="handleRegister" type="submit" class="text-base bg-cyan-800 rounded-md text-white w-full mx-auto py-2 ml-2 mt-3 xl:w-[500px]">
+                        @click.prevent="handleRegister" type="submit" class="text-base bg-cyan-800 rounded-md text-white w-full mx-auto py-2 ml-2 mt-3">
                             Register
                         </button>
 
