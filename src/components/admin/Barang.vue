@@ -13,7 +13,7 @@
                         </svg>
                     </li>
                     <li class="flex items-center">
-                        <p class="text-gray-600">Dashboard</p>
+                        <p class="text-gray-600">Barang</p>
                     </li>
                 </ol>
 
@@ -111,7 +111,7 @@
     @close="showEditModal = false"
 />
 
-<CreateBarangModal
+<CreateBarang
     :showCreateModalProp="showCreateModal"
     @closeModal="showCreateModal = false"
 />
@@ -122,9 +122,9 @@
 import { ref, onMounted, watch } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import { useProductStore } from "../../store/barang";
-import CreateBarangModal from "../../modals/CreateBarang.vue"
-import UpdateBarang from '../../modals/updatebarang.vue'
+import { useProductStore } from "../../store/barang"
+import CreateBarang from "../../modals/CreateBarang.vue"
+import UpdateBarang from "../../modals/UpdateBarang.vue"
 
 export default {
     setup() {
@@ -205,7 +205,7 @@ export default {
     },
     components: {
         UpdateBarang,
-        CreateBarangModal,
+        CreateBarang,
     },
     methods: {
         closeCreateModal() {

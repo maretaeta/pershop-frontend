@@ -38,24 +38,24 @@ export default {
 <template>
     <div class="font-poppins w-full mx-auto items-center min-h-screen justify-center justify-items-center flex p-5">
         <div class="flex flex-col md:flex-row md:flex">
-            <div class="flex lg:block">
-                <img src="@/assets/img.png" class="w-full h-full mx-auto" />
+            <div class="flex justify-center">
+                <img src="@/assets/img.png" class="mx-auto" />
             </div>
             <div class="mx-auto flex items-center justify-center justify-items-center">
                 <div class="bg-white rounded-xl w-full p-5">
-                    <h1 class="lg:text-2xl text-xl font-bold">Welcome To Cashier App,</h1>
-                    <p class="pt-2 pb-5 lg:pb-7 text-sm">
+                    <h1 class="lg:text-2xl text-xl font-semibold">Welcome To Cashier App,</h1>
+                    <p class="pt-2 pb-5 lg:pb-7 text-sm text-gray-700">
                         Welcome Back to Cashier Application: Easy and Fast Solution to Manage Business
                     </p>
                     <form class="mx-auto" @submit.prevent="handleRegister">
-                        <div class="mb-3 lg:mb-7 text-base">
+                        <div class="mb-3 lg:mb-4 text-base">
                             <label>
                                 <p class="text-base">Nama Lengkap</p>
                             </label>
                             <input v-model="registrationData.nama" type="text" placeholder="Enter Nama Lengkap" name="nama"
                                 class="mt-1 ml-2 w-full rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
                         </div>
-                        <div class="mb-3 lg:mb-7 text-base">
+                        <div class="mb-3 lg:mb-4 text-base">
                             <label>
                                 <p>Username</p>
                             </label>
@@ -63,7 +63,7 @@ export default {
                                class="mt-1 ml-2 w-full rounded-md pl-2 h-10 text-base bg-transparent border border-cyan-800" />
                         </div>
 
-                        <div class="mb-3 lg:mb-7 text-base">
+                        <div class="mb-3 lg:mb-4 text-base">
                             <label>
                                 <p>Password</p>
                             </label>
@@ -76,9 +76,9 @@ export default {
                         </button>
 
                     </form>
-                    <p class="text-center mt-7 mb-7 text-base">
+                    <p class="text-center my-3 text-sm">
                         Have an account?
-                        <span class="text-cyan-800 pl-1 text-base" @click="handleLogin" >Login</span>
+                        <span class="text-cyan-800 pl-1 text-sm" @click="handleLogin" >Login</span>
                     </p>
                 </div>
             </div>

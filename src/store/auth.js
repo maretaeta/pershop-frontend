@@ -1,5 +1,7 @@
 /** @format */
 
+// store/auth.js
+
 import { defineStore } from "pinia";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -7,8 +9,8 @@ import { jwtDecode } from "jwt-decode";
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     token: localStorage.getItem("token") || null,
-    users: [],
     role: null,
+    tokenExpiration: null,
   }),
 
   getters: {
@@ -16,33 +18,6 @@ export const useAuthStore = defineStore("auth", {
   },
 
   actions: {
-    // Register
-    async registerUser(userData) {
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/auth/register",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userData),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Registration failed");
-        }
-
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error("Registration error:", error);
-        throw error;
-      }
-    },
-
-    // Login
     async login(loginData) {
       try {
         const response = await axios.post(
@@ -64,40 +39,61 @@ export const useAuthStore = defineStore("auth", {
           const userRole = decodedToken.role;
           this.role = userRole;
 
-          return response.data;
+          const tokenExp = decodedToken.exp;
+          this.tokenExpiration = new Date(tokenExp * 1000);
 
+          return response.data;
         } else {
           console.error("Token not found in the response");
-          console.error("Response data:", response.data);
-          throw new Error("Login failed: Token missing in response");
         }
       } catch (error) {
-        console.error(
-          "Login error:",
-          error.response ? error.response.data : error.message
-        );
+        console.error("Login error:", error);
         throw error;
       }
     },
 
-    // logout
+    async checkTokenExpiration() {
+      if (this.token && this.tokenExpiration) {
+        const currentDateTime = new Date();
+        if (currentDateTime >= this.tokenExpiration) {
+          this.logout();
+        }
+      }
+    },
+
+    async fetchData() {
+      await this.checkTokenExpiration();
+      try {
+        const response = await axios.get("http://example.com/data");
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        throw error;
+      }
+    },
+
     logout() {
       localStorage.removeItem("token");
       this.token = null;
       this.role = null;
+      this.tokenExpiration = null;
     },
 
-     async updateProfilePicture(userId, file) {
+    async updateProfilePicture(userId, file) {
       try {
         const formData = new FormData();
         formData.append("image", file);
 
-        const response = await axios.post(`http://localhost:3000/api/v1/users/${userId}/profile-image`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${this.token}`,
-          },
-        });
+        const response = await axios.post(
+          `http://localhost:3000/api/v1/users/${userId}/profile-image`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        );
 
         return response.data;
       } catch (error) {
@@ -108,11 +104,15 @@ export const useAuthStore = defineStore("auth", {
 
     async updateUserData(userId, userData) {
       try {
-        const response = await axios.put(`http://localhost:3000/api/v1/users/${userId}`, userData, {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        });
+        const response = await axios.put(
+          `http://localhost:3000/api/v1/users/${userId}`,
+          userData,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        );
 
         return response.data;
       } catch (error) {

@@ -27,7 +27,7 @@
           <div class="grid grid-cols-2 xl:grid-cols-3 gap-6 mt-10">
             <div v-for="product in products" :key="product.id_barang" class="border p-2 rounded">
              <div class="items-center flex justify-center">
-               <img :src="product.image" class="h-48 items-center"/>
+               <img :src="product.image" class="h-48 items-center "/>
              </div>
               <div class="flex justify-between text-xs xl:text-sm px-3 pt-4">
                 <h3 class="h-10">{{ product.nama_barang }}</h3>

@@ -21,16 +21,36 @@
                         <h3 class="text-2xl font-medium text-gray-700">History transaction</h3>
                         <p class="text-sm text-gray-400 mb-6">Data Transaksi</p>
                     </div>
-                </div>
+                </div> 
             </div>
 
-            <!-- Table history -->
-          <div v-for="(transaction, index) in transaksi" :key="index" class="border border-orange-600 rounded-lg w-full mx-auto mb-10 shadow-md">
+        <!-- Table history -->
+        <div v-for="(transaction, index) in transaksi" :key="index" class="border border-orange-600 rounded-lg w-full mx-auto mb-10 shadow-md">
             <div class="p-4">
               <div class="flex justify-between pb-9 font-medium text-sm md:text-lg">
                 <p class="text-cyan-800 ">Transaksi #{{ transaction.id_transaksi }}</p>
-                <p>{{ formatDate(transaction.createdAt)}}</p>
+                    <div class="flex justify-between gap-10 ">
+                        <p>{{ formatDate(transaction.createdAt) }}</p>
+                        <font-awesome-icon icon="ellipsis-vertical" class="p-1" @click="transaction.dropDownOpen = !transaction.dropDownOpen"/>
+
+                    </div>
+
+                    <!-- dropdown meu history -->
+                    <div v-if="transaction.dropDownOpen" class="absolute border bg-white border-t-0 shadow-xl text-gray-700 rounded-lg w-44 right-0 mr-10 p-2 pt-5 mt-10">                
+                        <div class="flex gap-3 px-4 py-2 hover:bg-gray-100 text-green-700">
+                            <font-awesome-icon icon="receipt" class="pt-1" />
+                            <span>Detail</span>
+                        </div>
+                        <div class="px-4 py-2 hover:bg-gray-200 flex gap-3 text-red-600 " >
+                            <font-awesome-icon icon="trash" class="pt-1"/>
+                            <span class="">Delete</span>
+                        </div>
+                    </div> 
+
               </div>
+
+   
+
               <div v-for="(barangTransaksi, i) in transaction.barang_transaksi" :key="i">
                 <div class="flex flex-col md:flex-row md:justify-between pb-4">
                   <p class="font-medium">{{ barangTransaksi.barang.nama_barang }}</p>
@@ -45,8 +65,10 @@
               </div>
             </div>
           </div>
+
+           
         </div>
-      </div>
+    </div>
 </template>
 
 <script>
@@ -61,7 +83,11 @@ export default {
         async function fetchTransaksi() {
             const response = await transaksiStore.getTransaksi();
             if (response && response.data) {
-                transaksi.value = response.data;
+                transaksi.value = response.data.map(transaction => ({
+                    ...transaction,
+                    dropDownOpen: false
+                }));
+
             } else {
                 console.error("Error fetching transaction data:", response);
             }
@@ -87,9 +113,13 @@ export default {
         };
 
 
+
+
         onMounted(() => {
             fetchTransaksi();
         });
+
+        
 
         return {
             transaksi,
@@ -97,5 +127,12 @@ export default {
             formatDate
         };
     },
+
+    data() {
+        return {
+            dropDownOpen: false,
+        };
+    },
+
 };
 </script>

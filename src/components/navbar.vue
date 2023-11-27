@@ -3,7 +3,6 @@ import { useStore } from '../store/store';
 import { useAuthStore } from '../store/auth';
 import VueFeather from 'vue-feather'
 import { useRouter } from "vue-router"
-import { AtSignIcon } from 'vue-feather-icons';
 
 export default {
     name: 'navbar',
@@ -59,7 +58,7 @@ export default {
 
 <template>
     <div class="font-poppins sticky top-0 z-50 pl-0">
-        <div class="w-full h-24 px-9 bg-white flex items-center justify-between">
+        <div class="w-full h-24 px-3 pr-6 bg-white flex items-center justify-between">
             
             <!-- logoo -->
             <div class="w-full h-24 items-center py-3 hidden lg:block">
@@ -92,14 +91,14 @@ export default {
         <!-- dropdown account -->
         <div class="absolute border bg-white border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 right-0 mr-6 p-2"
             :class="dropDownOpen ? '' : 'hidden'">
-            <p class="flex gap-3 px-4 py-2 hover:bg-gray-200 text-cyan-950" @click="handleAccount">
+            <div class="flex gap-3 px-4 py-2 hover:bg-gray-200 text-cyan-950" @click="handleAccount">
                 <font-awesome-icon icon="user" class="pt-1" />
                 <span>Account</span>
-            </p>
-            <p class="px-4 py-2 hover:bg-gray-200 flex gap-3 text-red-600 " @click="handleLogout">
+            </div>
+            <div class="px-4 py-2 hover:bg-gray-200 flex gap-3 text-red-600 " @click="handleLogout">
                 <font-awesome-icon icon="right-from-bracket" class="pt-1"/>
                 <span class="">Logout</span>
-            </p>
+            </div>
         </div>
     </div>
 </template>

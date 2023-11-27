@@ -1,13 +1,13 @@
 <template>
     <div class="font-poppins w-full mx-auto items-center min-h-screen justify-center justify-items-center flex p-5">
         <div class="flex flex-col md:flex-row md:flex">
-            <div class="flex lg:block">
-                <img src="@/assets/img.png" class="w-full h-full mx-auto" />
+            <div class="flex justify-center">
+                <img src="@/assets/img.png" class="mx-auto" />
             </div>
             <div class="mx-auto flex items-center justify-center justify-items-center">
                 <div class="bg-white rounded-xl w-full p-5">
-                    <h1 class="lg:text-2xl text-xl font-bold">Hello Welcome Back,</h1>
-                    <p class="pt-2 pb-5 lg:pb-7 text-sm">
+                    <h1 class="lg:text-2xl text-xl font-semibold">Hello Welcome Back,</h1>
+                    <p class="pt-2 pb-5 lg:pb-7 text-sm text-gray-700">
                         Welcome Back to Cashier Application: Easy and Fast Solution to Manage Business
                     </p>
                     <form class="mx-auto" @submit.prevent="handleLogin">
@@ -31,9 +31,9 @@
                             Login
                         </button>
                     </form>
-                    <p class="text-center pt-7 text-base">
+                    <p class="text-center pt-7 text-sm">
                         Don't have an account?
-                        <span class="text-cyan-900 pl-1 text-base" @click="handleRegister">Sign up</span>
+                        <span class="text-cyan-900 pl-1 text-sm" @click="handleRegister">Sign up</span>
                     </p>
                 </div>
             </div>
@@ -45,6 +45,7 @@
 import { ref } from 'vue';
 import { useAuthStore } from '../store/auth';
 import { useRouter } from 'vue-router';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
     setup() {
@@ -55,12 +56,19 @@ export default {
             password: '',
         });
 
-        const handleLogin = async () => {
+       const handleLogin = async () => {
             try {
                 const response = await store.login(loginData.value);
 
-                if (response && response.status === 'Okay' && response.message === 'Successfully Login' && response.result && response.result.users) {
-                    const userRole = response.result.users.role;
+                if (
+                    response &&
+                    response.status === 'Okay' &&
+                    response.message === 'Successfully Login' &&
+                    response.result &&
+                    response.result.token 
+                ) {
+                    const decodedToken = jwtDecode(response.result.token);
+                    const userRole = decodedToken.role;
 
                     if (userRole === 'ADMIN') {
                         router.push('/dashboardAdmin');
@@ -76,6 +84,8 @@ export default {
                 console.error('An error occurred during login:', error);
             }
         };
+
+
 
         const handleRegister = () => {
             router.push('Register')
